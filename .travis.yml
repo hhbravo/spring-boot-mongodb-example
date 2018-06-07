@@ -1,0 +1,26 @@
+language: java
+sudo: false
+
+jdk:
+  - oraclejdk8
+
+sonarcloud:
+  organization: "hhbravo-github" # the key of the org you chose at step #3
+    token:
+      secure: $SONAR_TOKEN # encrypted value of your token
+
+before_install:
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
+
+script:
+ - "./mvnw clean verify"
+ - if [ "$TRAVIS_BRANCH" = "master" ]; then sonar-scanner; fi
+
+cache:
+  directories:
+    - $HOME/.m2
+    - $HOME/.sonar/cache
+    - $HOME/.sonarscanner
+
+
+
