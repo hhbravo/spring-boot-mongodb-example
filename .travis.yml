@@ -6,8 +6,8 @@ jdk:
 
 sonarcloud:
   organization: "hhbravo-github" # the key of the org you chose at step #3
-    token:
-      secure: $SONAR_TOKEN # encrypted value of your token
+  token:
+    secure: $SONAR_TOKEN # encrypted value of your token
 
 before_install:
   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
