@@ -1,4 +1,3 @@
 # Spring Boot Using Spring Data MongoDB Example
-
-This project depicts the Spring Boot Example with Spring Data MongoDB and REST Example.
+[![Build Status](https://travis-ci.org/hhbravo/spring-boot-mongodb-example.svg?branch=master)](https://travis-ci.org/cesardl/person-sample-webapp)
 

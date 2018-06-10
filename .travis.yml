@@ -3,30 +3,27 @@ sudo: false
 install: true
 
 addons:
-  apt:
-    update: true
-
- # sonarcloud:
-  #  organization: "cesardl-github" # the key of the org you chose at step #3
-   # token:
-   #   secure: $SONAR_TOKEN # encrypted value of your token
+  sonarcloud:
+    organization: "hhbravo-github"
+    token:
+      secure: $SONAR_TOKEN # encrypted value of your token
 
 jdk:
   - oraclejdk8
 
-git:
-  depth: 3
-
 #before_install:
- # - mysql -e 'CREATE DATABASE IF NOT EXISTS lead CHARACTER SET utf8 COLLATE utf8_general_ci;'
- # - mysql -u travis lead < database/lead_schema.sql
+  # - mysql -e 'CREATE DATABASE IF NOT EXISTS lead CHARACTER SET utf8 COLLATE utf8_general_ci;'
+  # - mysql -u travis lead < database/lead_schema.sql
+
+before_install:
+  - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
 
 script:
-  - mvn clean verify
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then sonar-scanner; fi
+ - "./mvnw clean verify"
+ - if [ "$TRAVIS_BRANCH" = "master" ]; then sonar-scanner; fi
 
 cache:
   directories:
-    - $HOME/.m2
-    - $HOME/.sonar/cache
-    - $HOME/.sonarscanner
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+    - '$HOME/.sonarscanner'
