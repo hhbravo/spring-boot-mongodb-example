@@ -2,6 +2,9 @@ language: java
 sudo: false
 install: true
 
+services:
+  - mongodb
+
 addons:
   sonarcloud:
     organization: "hhbravo-github"
@@ -15,7 +18,7 @@ jdk:
   # - mysql -e 'CREATE DATABASE IF NOT EXISTS lead CHARACTER SET utf8 COLLATE utf8_general_ci;'
   # - mysql -u travis lead < database/lead_schema.sql
 
-before_install:
+before_script:
   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
 
 script:
