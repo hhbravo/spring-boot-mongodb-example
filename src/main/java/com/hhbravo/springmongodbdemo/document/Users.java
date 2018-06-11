@@ -3,7 +3,7 @@ package com.hhbravo.springmongodbdemo.document;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection = "users")
 public class Users {
 
     @Id
@@ -11,14 +11,6 @@ public class Users {
     private String name;
     private String teamName;
     private Long salary;
-
-    public Users(Integer id, String name, String teamName, Long salary) {
-        this.id = id;
-        this.name = name;
-        this.teamName = teamName;
-        this.salary = salary;
-    }
-
     public Integer getId() {
         return id;
     }
