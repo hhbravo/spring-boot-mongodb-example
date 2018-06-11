@@ -19,6 +19,7 @@ jdk:
   # - mysql -u travis lead < database/lead_schema.sql
 
 before_script:
+  - chmod +x mvnw
   - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
 
 script:
